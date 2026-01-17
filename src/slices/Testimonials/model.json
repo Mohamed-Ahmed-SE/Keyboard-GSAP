@@ -1,0 +1,68 @@
+{
+    "id": "testimonials",
+    "type": "SharedSlice",
+    "name": "Testimonials",
+    "description": "Customer reviews and quotes",
+    "variations": [
+        {
+            "id": "default",
+            "name": "Default",
+            "docURL": "...",
+            "version": "sktwi1xtmkfgx8626",
+            "description": "Default",
+            "primary": {
+                "heading": {
+                    "type": "StructuredText",
+                    "config": {
+                        "label": "Heading",
+                        "placeholder": "",
+                        "allowTargetBlank": true,
+                        "single": "heading2"
+                    }
+                },
+                "items": {
+                    "type": "Group",
+                    "config": {
+                        "label": "Testimonials",
+                        "fields": {
+                            "quote": {
+                                "type": "StructuredText",
+                                "config": {
+                                    "label": "Quote",
+                                    "placeholder": "This keyboard changed my life...",
+                                    "multi": "paragraph"
+                                }
+                            },
+                            "author": {
+                                "type": "Text",
+                                "config": {
+                                    "label": "Author Name",
+                                    "placeholder": "Jane Doe"
+                                }
+                            },
+                            "role": {
+                                "type": "Text",
+                                "config": {
+                                    "label": "Author Role",
+                                    "placeholder": "Software Engineer"
+                                }
+                            },
+                            "avatar": {
+                                "type": "Image",
+                                "config": {
+                                    "label": "Avatar",
+                                    "constraint": {
+                                        "width": 100,
+                                        "height": 100
+                                    },
+                                    "thumbnails": []
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "items": {}
+        }
+    ]
+}

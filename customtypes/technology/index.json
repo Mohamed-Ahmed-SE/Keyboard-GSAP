@@ -1,0 +1,47 @@
+{
+    "id": "technology",
+    "label": "Technology",
+    "format": "custom",
+    "repeatable": false,
+    "status": true,
+    "json": {
+        "Main": {
+            "meta_title": {
+                "type": "Text",
+                "config": {
+                    "label": "Meta Title",
+                    "placeholder": "Technology | Nimbus"
+                }
+            },
+            "meta_description": {
+                "type": "Text",
+                "config": {
+                    "label": "Meta Description",
+                    "placeholder": "Deep dive into our engineering..."
+                }
+            },
+            "meta_image": {
+                "type": "Image",
+                "config": {
+                    "label": "Meta Image",
+                    "constraint": {},
+                    "thumbnails": []
+                }
+            },
+            "slices": {
+                "type": "Slices",
+                "fieldset": "Slice Zone",
+                "config": {
+                    "choices": {
+                        "hero": {
+                            "type": "SharedSlice"
+                        },
+                        "bento_box": {
+                            "type": "SharedSlice"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

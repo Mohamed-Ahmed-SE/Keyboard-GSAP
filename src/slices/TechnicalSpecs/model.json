@@ -1,0 +1,57 @@
+{
+    "id": "technical_specs",
+    "type": "SharedSlice",
+    "name": "TechnicalSpecs",
+    "description": "Grid of technical specifications",
+    "variations": [
+        {
+            "id": "default",
+            "name": "Default",
+            "docURL": "...",
+            "version": "sktwi1xtmkfgx8626",
+            "description": "Default",
+            "primary": {
+                "heading": {
+                    "type": "StructuredText",
+                    "config": {
+                        "label": "Heading",
+                        "placeholder": "Tech Specs",
+                        "allowTargetBlank": true,
+                        "single": "heading2"
+                    }
+                },
+                "description": {
+                    "type": "StructuredText",
+                    "config": {
+                        "label": "Description",
+                        "placeholder": "Detailed breakdown...",
+                        "multi": "paragraph"
+                    }
+                },
+                "specs": {
+                    "type": "Group",
+                    "config": {
+                        "label": "Specifications",
+                        "fields": {
+                            "label": {
+                                "type": "Text",
+                                "config": {
+                                    "label": "Label",
+                                    "placeholder": "Polling Rate"
+                                }
+                            },
+                            "value": {
+                                "type": "Text",
+                                "config": {
+                                    "label": "Value",
+                                    "placeholder": "1000Hz"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "items": {}
+        }
+    ]
+}

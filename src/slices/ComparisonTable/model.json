@@ -1,0 +1,82 @@
+{
+    "id": "comparison_table",
+    "type": "SharedSlice",
+    "name": "ComparisonTable",
+    "description": "Compare multiple keyboard models",
+    "variations": [
+        {
+            "id": "default",
+            "name": "Default",
+            "docURL": "...",
+            "version": "sktwi1xtmkfgx8626",
+            "description": "Default",
+            "primary": {
+                "heading": {
+                    "type": "StructuredText",
+                    "config": {
+                        "label": "Heading",
+                        "placeholder": "",
+                        "allowTargetBlank": true,
+                        "single": "heading2"
+                    }
+                },
+                "items": {
+                    "type": "Group",
+                    "config": {
+                        "label": "Items",
+                        "fields": {
+                            "model_name": {
+                                "type": "Text",
+                                "config": {
+                                    "label": "Model Name",
+                                    "placeholder": ""
+                                }
+                            },
+                            "price": {
+                                "type": "Text",
+                                "config": {
+                                    "label": "Price",
+                                    "placeholder": "$199"
+                                }
+                            },
+                            "switch_type": {
+                                "type": "Text",
+                                "config": {
+                                    "label": "Switch Type",
+                                    "placeholder": "Mechanical (Red/Blue/Brown)"
+                                }
+                            },
+                            "wireless": {
+                                "type": "Boolean",
+                                "config": {
+                                    "label": "Wireless",
+                                    "placeholder_false": "No",
+                                    "placeholder_true": "Yes",
+                                    "default_value": false
+                                }
+                            },
+                            "hot_swappable": {
+                                "type": "Boolean",
+                                "config": {
+                                    "label": "Hot Swappable",
+                                    "placeholder_false": "No",
+                                    "placeholder_true": "Yes",
+                                    "default_value": true
+                                }
+                            },
+                            "image": {
+                                "type": "Image",
+                                "config": {
+                                    "label": "Product Image",
+                                    "constraint": {},
+                                    "thumbnails": []
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "items": {}
+        }
+    ]
+}

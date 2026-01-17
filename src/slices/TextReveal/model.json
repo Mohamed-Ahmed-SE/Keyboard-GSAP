@@ -1,0 +1,40 @@
+{
+    "id": "text_reveal",
+    "type": "SharedSlice",
+    "name": "TextReveal",
+    "description": "Large kinetic text animation",
+    "variations": [
+        {
+            "id": "default",
+            "name": "Default",
+            "docURL": "...",
+            "version": "sktwi1xtmkfgx8626",
+            "description": "Default",
+            "primary": {
+                "text": {
+                    "type": "StructuredText",
+                    "config": {
+                        "label": "Text",
+                        "placeholder": "Kinetic Typography",
+                        "allowTargetBlank": true,
+                        "single": "heading2"
+                    }
+                },
+                "style": {
+                    "type": "Select",
+                    "config": {
+                        "label": "Animation Style",
+                        "placeholder": "Fade",
+                        "options": [
+                            "Fade",
+                            "Stagger",
+                            "Rotate"
+                        ],
+                        "default_value": "Stagger"
+                    }
+                }
+            },
+            "items": {}
+        }
+    ]
+}

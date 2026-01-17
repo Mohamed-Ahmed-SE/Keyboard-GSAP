@@ -8,5 +8,12 @@ export const components = {
   hero: dynamic(() => import("./Hero")),
   marquee: dynamic(() => import("./Marquee")),
   purchase_button: dynamic(() => import("./PurchaseButton")),
+  comparison_table: dynamic(() => import("./ComparisonTable")),
   switch_playground: dynamic(() => import("./SwitchPlayground")),
+  testimonials: dynamic(() => import("./Testimonials")),
+  technical_specs: dynamic(() => import("./TechnicalSpecs")),
+  ambient_background: dynamic(() => import("./AmbientBackground")),
+  content_image_split: dynamic(() => import("./ContentImageSplit")),
+  text_reveal: dynamic(() => import("./TextReveal")),
+  closing_transition: dynamic(() => import("./ClosingTransition")),
 };

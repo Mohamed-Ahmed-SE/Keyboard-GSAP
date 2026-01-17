@@ -1,0 +1,40 @@
+{
+    "id": "ambient_background",
+    "type": "SharedSlice",
+    "name": "AmbientBackground",
+    "description": "Full-screen ambient visual",
+    "variations": [
+        {
+            "id": "default",
+            "name": "Default",
+            "docURL": "...",
+            "version": "sktwi1xtmkfgx8626",
+            "description": "Default",
+            "primary": {
+                "heading": {
+                    "type": "StructuredText",
+                    "config": {
+                        "label": "Overlay Heading",
+                        "placeholder": "The Universe at your fingertips",
+                        "allowTargetBlank": true,
+                        "single": "heading1"
+                    }
+                },
+                "style": {
+                    "type": "Select",
+                    "config": {
+                        "label": "Visual Style",
+                        "placeholder": "Select a style",
+                        "options": [
+                            "Stars",
+                            "Grid",
+                            "Noise"
+                        ],
+                        "default_value": "Stars"
+                    }
+                }
+            },
+            "items": {}
+        }
+    ]
+}

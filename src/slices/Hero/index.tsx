@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState, useRef } from "react";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { Bounded } from "@/components/Bounded";
@@ -14,7 +14,9 @@ import { Loader } from "@/components/Loader";
 import { useProgress } from "@react-three/drei";
 import clsx from "clsx";
 
-gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
+}
 
 function LoaderWrapper() {
   const { active } = useProgress();
@@ -50,11 +52,17 @@ export type HeroProps = SliceComponentProps<Content.HeroSlice>;
  * Component for "Hero" Slices.
  */
 const Hero: FC<HeroProps> = ({ slice }) => {
+  const container = useRef<HTMLElement>(null);
+
   useGSAP(() => {
     const mm = gsap.matchMedia();
 
     mm.add("(prefers-reduced-motion: no-preference)", () => {
-      const split = SplitText.create(".hero-heading", {
+      if (!container.current) return;
+      const heading = container.current.querySelector(".hero-heading");
+      if (!heading) return;
+
+      const split = SplitText.create(heading, {
         type: "chars,lines",
         mask: "lines",
         linesClass: "line++",
@@ -92,10 +100,11 @@ const Hero: FC<HeroProps> = ({ slice }) => {
     mm.add("(prefers-reduced-motion: reduce)", () => {
       gsap.set(".hero-heading, .hero-body", { opacity: 1 });
     });
-  });
+  }, { scope: container });
 
   return (
     <section
+      ref={container}
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       className="hero relative h-dvh text-white text-shadow-black/30 text-shadow-lg motion-safe:h-[300vh]"

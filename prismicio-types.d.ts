@@ -6,10 +6,10 @@ type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 type PickContentRelationshipFieldData<
   TRelationship extends
-    | prismic.CustomTypeModelFetchCustomTypeLevel1
-    | prismic.CustomTypeModelFetchCustomTypeLevel2
-    | prismic.CustomTypeModelFetchGroupLevel1
-    | prismic.CustomTypeModelFetchGroupLevel2,
+  | prismic.CustomTypeModelFetchCustomTypeLevel1
+  | prismic.CustomTypeModelFetchCustomTypeLevel2
+  | prismic.CustomTypeModelFetchGroupLevel1
+  | prismic.CustomTypeModelFetchGroupLevel2,
   TData extends Record<
     string,
     | prismic.AnyRegularField
@@ -37,10 +37,10 @@ type PickContentRelationshipFieldData<
     > as TGroup["id"]]: TData[TGroup["id"]] extends prismic.GroupField<
       infer TGroupData
     >
-      ? prismic.GroupField<
-          PickContentRelationshipFieldData<TGroup, TGroupData, TLang>
-        >
-      : never;
+    ? prismic.GroupField<
+      PickContentRelationshipFieldData<TGroup, TGroupData, TLang>
+    >
+    : never;
   } & // Other fields
   {
     [TFieldKey in Extract<
@@ -51,8 +51,8 @@ type PickContentRelationshipFieldData<
 
 type ContentRelationshipFieldWithData<
   TCustomType extends
-    | readonly (prismic.CustomTypeModelFetchCustomTypeLevel1 | string)[]
-    | readonly (prismic.CustomTypeModelFetchCustomTypeLevel2 | string)[],
+  | readonly (prismic.CustomTypeModelFetchCustomTypeLevel1 | string)[]
+  | readonly (prismic.CustomTypeModelFetchCustomTypeLevel2 | string)[],
   TLang extends string = string,
 > = {
   [ID in Exclude<
@@ -75,7 +75,14 @@ type HomepageDocumentDataSlicesSlice =
   | SwitchPlaygroundSlice
   | ColorChangerSlice
   | BentoBoxSlice
-  | HeroSlice;
+  | HeroSlice
+  | ComparisonTableSlice
+  | TestimonialsSlice
+  | TechnicalSpecsSlice
+  | AmbientBackgroundSlice
+  | ContentImageSplitSlice
+  | TextRevealSlice
+  | ClosingTransitionSlice;
 
 /**
  * Content for Homepage documents
@@ -244,8 +251,104 @@ interface SwitchDocumentData {
 export type SwitchDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<SwitchDocumentData>, "switch", Lang>;
 
+/**
+ * Content for Keyboards documents
+ */
+interface KeyboardsDocumentData {
+  /**
+   * Slice Zone field in *Keyboards*
+   */
+  slices: prismic.SliceZone<HomepageDocumentDataSlicesSlice>; // Reusing homepage slices for now
+  /**
+   * Meta Title field in *Keyboards*
+   */
+  meta_title: prismic.KeyTextField;
+  /**
+   * Meta Description field in *Keyboards*
+   */
+  meta_description: prismic.KeyTextField;
+  /**
+   * Meta Image field in *Keyboards*
+   */
+  meta_image: prismic.ImageField<never>;
+}
+export type KeyboardsDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<Simplify<KeyboardsDocumentData>, "keyboards", Lang>;
+
+/**
+ * Content for Switches documents
+ */
+interface SwitchesDocumentData {
+  /**
+   * Slice Zone field in *Switches*
+   */
+  slices: prismic.SliceZone<HomepageDocumentDataSlicesSlice>;
+  /**
+   * Meta Title field in *Switches*
+   */
+  meta_title: prismic.KeyTextField;
+  /**
+   * Meta Description field in *Switches*
+   */
+  meta_description: prismic.KeyTextField;
+  /**
+   * Meta Image field in *Switches*
+   */
+  meta_image: prismic.ImageField<never>;
+}
+export type SwitchesDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<Simplify<SwitchesDocumentData>, "switches", Lang>;
+
+/**
+ * Content for Configurator documents
+ */
+interface ConfiguratorDocumentData {
+  /**
+   * Slice Zone field in *Configurator*
+   */
+  slices: prismic.SliceZone<HomepageDocumentDataSlicesSlice>;
+  /**
+   * Meta Title field in *Configurator*
+   */
+  meta_title: prismic.KeyTextField;
+  /**
+   * Meta Description field in *Configurator*
+   */
+  meta_description: prismic.KeyTextField;
+  /**
+   * Meta Image field in *Configurator*
+   */
+  meta_image: prismic.ImageField<never>;
+}
+export type ConfiguratorDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<Simplify<ConfiguratorDocumentData>, "configurator", Lang>;
+
+/**
+ * Content for Technology documents
+ */
+interface TechnologyDocumentData {
+  /**
+   * Slice Zone field in *Technology*
+   */
+  slices: prismic.SliceZone<HomepageDocumentDataSlicesSlice>;
+  /**
+   * Meta Title field in *Technology*
+   */
+  meta_title: prismic.KeyTextField;
+  /**
+   * Meta Description field in *Technology*
+   */
+  meta_description: prismic.KeyTextField;
+  /**
+   * Meta Image field in *Technology*
+   */
+  meta_image: prismic.ImageField<never>;
+}
+export type TechnologyDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<Simplify<TechnologyDocumentData>, "technology", Lang>;
+
 export type AllDocumentTypes =
   | HomepageDocument
+  | KeyboardsDocument
+  | SwitchesDocument
+  | ConfiguratorDocument
+  | TechnologyDocument
   | ProductDocument
   | SwitchDocument;
 
@@ -682,7 +785,343 @@ type SwitchPlaygroundSliceVariation = SwitchPlaygroundSliceDefault;
  */
 export type SwitchPlaygroundSlice = prismic.SharedSlice<
   "switch_playground",
+  "switch_playground",
   SwitchPlaygroundSliceVariation
+>;
+
+/**
+ * Item in *ComparisonTable → Default → Primary → Items*
+ */
+export interface ComparisonTableSliceDefaultPrimaryItemsItem {
+  /**
+   * Model Name field in *ComparisonTable → Default → Primary → Items*
+   */
+  model_name: prismic.KeyTextField;
+  /**
+   * Price field in *ComparisonTable → Default → Primary → Items*
+   */
+  price: prismic.KeyTextField;
+  /**
+   * Switch Type field in *ComparisonTable → Default → Primary → Items*
+   */
+  switch_type: prismic.KeyTextField;
+  /**
+   * Wireless field in *ComparisonTable → Default → Primary → Items*
+   */
+  wireless: prismic.BooleanField;
+  /**
+   * Hot Swappable field in *ComparisonTable → Default → Primary → Items*
+   */
+  hot_swappable: prismic.BooleanField;
+  /**
+   * Image field in *ComparisonTable → Default → Primary → Items*
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
+ * Primary content in *ComparisonTable → Default → Primary*
+ */
+export interface ComparisonTableSliceDefaultPrimary {
+  /**
+   * Heading field in *ComparisonTable → Default → Primary*
+   */
+  heading: prismic.RichTextField;
+  /**
+   * Items field in *ComparisonTable → Default → Primary*
+   */
+  items: prismic.GroupField<Simplify<ComparisonTableSliceDefaultPrimaryItemsItem>>;
+}
+
+/**
+ * Default variation for ComparisonTable Slice
+ */
+export type ComparisonTableSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ComparisonTableSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ComparisonTable*
+ */
+type ComparisonTableSliceVariation = ComparisonTableSliceDefault;
+
+/**
+ * ComparisonTable Shared Slice
+ */
+export type ComparisonTableSlice = prismic.SharedSlice<
+  "comparison_table",
+  ComparisonTableSliceVariation
+>;
+
+/**
+ * Item in *Testimonials → Default → Primary → Items*
+ */
+export interface TestimonialsSliceDefaultPrimaryItemsItem {
+  /**
+   * Quote field in *Testimonials → Default → Primary → Items*
+   */
+  quote: prismic.RichTextField;
+  /**
+   * Author field in *Testimonials → Default → Primary → Items*
+   */
+  author: prismic.KeyTextField;
+  /**
+   * Role field in *Testimonials → Default → Primary → Items*
+   */
+  role: prismic.KeyTextField;
+  /**
+   * Avatar field in *Testimonials → Default → Primary → Items*
+   */
+  avatar: prismic.ImageField<never>;
+}
+
+/**
+ * Primary content in *Testimonials → Default → Primary*
+ */
+export interface TestimonialsSliceDefaultPrimary {
+  /**
+   * Heading field in *Testimonials → Default → Primary*
+   */
+  heading: prismic.RichTextField;
+  /**
+   * Items field in *Testimonials → Default → Primary*
+   */
+  items: prismic.GroupField<Simplify<TestimonialsSliceDefaultPrimaryItemsItem>>;
+}
+
+/**
+ * Default variation for Testimonials Slice
+ */
+export type TestimonialsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TestimonialsSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Testimonials*
+ */
+type TestimonialsSliceVariation = TestimonialsSliceDefault;
+
+/**
+ * Testimonials Shared Slice
+ */
+export type TestimonialsSlice = prismic.SharedSlice<
+  "testimonials",
+  TestimonialsSliceVariation
+>;
+
+/**
+ * Item in *TechnicalSpecs → Default → Primary → Specs*
+ */
+export interface TechnicalSpecsSliceDefaultPrimarySpecsItem {
+  /**
+   * Label field in *TechnicalSpecs → Default → Primary → Specs*
+   */
+  label: prismic.KeyTextField;
+  /**
+   * Value field in *TechnicalSpecs → Default → Primary → Specs*
+   */
+  value: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *TechnicalSpecs → Default → Primary*
+ */
+export interface TechnicalSpecsSliceDefaultPrimary {
+  /**
+   * Heading field in *TechnicalSpecs → Default → Primary*
+   */
+  heading: prismic.RichTextField;
+  /**
+   * Description field in *TechnicalSpecs → Default → Primary*
+   */
+  description: prismic.RichTextField;
+  /**
+   * Specs field in *TechnicalSpecs → Default → Primary*
+   */
+  specs: prismic.GroupField<Simplify<TechnicalSpecsSliceDefaultPrimarySpecsItem>>;
+}
+
+/**
+ * Default variation for TechnicalSpecs Slice
+ */
+export type TechnicalSpecsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TechnicalSpecsSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *TechnicalSpecs*
+ */
+type TechnicalSpecsSliceVariation = TechnicalSpecsSliceDefault;
+
+/**
+ * TechnicalSpecs Shared Slice
+ */
+export type TechnicalSpecsSlice = prismic.SharedSlice<
+  "technical_specs",
+  TechnicalSpecsSliceDefault,
+  TechnicalSpecsSliceVariation
+>;
+
+/**
+ * Primary content in *AmbientBackground → Default → Primary*
+ */
+export interface AmbientBackgroundSliceDefaultPrimary {
+  /**
+   * Overlay Heading field in *AmbientBackground → Default → Primary*
+   */
+  heading: prismic.RichTextField;
+  /**
+   * Visual Style field in *AmbientBackground → Default → Primary*
+   */
+  style: prismic.SelectField<"Stars" | "Grid" | "Noise">;
+}
+
+/**
+ * Default variation for AmbientBackground Slice
+ */
+export type AmbientBackgroundSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<AmbientBackgroundSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *AmbientBackground*
+ */
+type AmbientBackgroundSliceVariation = AmbientBackgroundSliceDefault;
+
+/**
+ * AmbientBackground Shared Slice
+ */
+export type AmbientBackgroundSlice = prismic.SharedSlice<
+  "ambient_background",
+  AmbientBackgroundSliceVariation
+>;
+
+/**
+ * Primary content in *ContentImageSplit → Default → Primary*
+ */
+export interface ContentImageSplitSliceDefaultPrimary {
+  /**
+   * Heading field in *ContentImageSplit → Default → Primary*
+   */
+  heading: prismic.RichTextField;
+  /**
+   * Body field in *ContentImageSplit → Default → Primary*
+   */
+  body: prismic.RichTextField;
+  /**
+   * Image field in *ContentImageSplit → Default → Primary*
+   */
+  image: prismic.ImageField<never>;
+  /**
+   * Image Position field in *ContentImageSplit → Default → Primary*
+   */
+  image_position: prismic.SelectField<"Left" | "Right">;
+}
+
+/**
+ * Default variation for ContentImageSplit Slice
+ */
+export type ContentImageSplitSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ContentImageSplitSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ContentImageSplit*
+ */
+type ContentImageSplitSliceVariation = ContentImageSplitSliceDefault;
+
+/**
+ * ContentImageSplit Shared Slice
+ */
+export type ContentImageSplitSlice = prismic.SharedSlice<
+  "content_image_split",
+  ContentImageSplitSliceVariation
+>;
+
+/**
+ * Primary content in *TextReveal → Default → Primary*
+ */
+export interface TextRevealSliceDefaultPrimary {
+  /**
+   * Text field in *TextReveal → Default → Primary*
+   */
+  text: prismic.RichTextField;
+  /**
+   * Animation Style field in *TextReveal → Default → Primary*
+   */
+  style: prismic.SelectField<"Fade" | "Stagger" | "Rotate">;
+}
+
+/**
+ * Default variation for TextReveal Slice
+ */
+export type TextRevealSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TextRevealSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *TextReveal*
+ */
+type TextRevealSliceVariation = TextRevealSliceDefault;
+
+/**
+ * TextReveal Shared Slice
+ */
+export type TextRevealSlice = prismic.SharedSlice<
+  "text_reveal",
+  TextRevealSliceVariation
+>;
+
+/**
+ * Primary content in *ClosingTransition → Default → Primary*
+ */
+export interface ClosingTransitionSliceDefaultPrimary {
+  /**
+   * Heading field in *ClosingTransition → Default → Primary*
+   */
+  heading: prismic.RichTextField;
+  /**
+   * CTA Text field in *ClosingTransition → Default → Primary*
+   */
+  cta_text: prismic.KeyTextField;
+  /**
+   * CTA Link field in *ClosingTransition → Default → Primary*
+   */
+  cta_link: prismic.LinkField;
+}
+
+/**
+ * Default variation for ClosingTransition Slice
+ */
+export type ClosingTransitionSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ClosingTransitionSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ClosingTransition*
+ */
+type ClosingTransitionSliceVariation = ClosingTransitionSliceDefault;
+
+/**
+ * ClosingTransition Shared Slice
+ */
+export type ClosingTransitionSlice = prismic.SharedSlice<
+  "closing_transition",
+  ClosingTransitionSliceVariation
 >;
 
 declare module "@prismicio/client" {
@@ -713,6 +1152,14 @@ declare module "@prismicio/client" {
       ProductDocumentData,
       SwitchDocument,
       SwitchDocumentData,
+      KeyboardsDocument,
+      KeyboardsDocumentData,
+      SwitchesDocument,
+      SwitchesDocumentData,
+      ConfiguratorDocument,
+      ConfiguratorDocumentData,
+      TechnologyDocument,
+      TechnologyDocumentData,
       AllDocumentTypes,
       BentoBoxSlice,
       BentoBoxSliceDefaultPrimaryItemsItem,
@@ -741,6 +1188,39 @@ declare module "@prismicio/client" {
       SwitchPlaygroundSliceDefaultPrimary,
       SwitchPlaygroundSliceVariation,
       SwitchPlaygroundSliceDefault,
+      ComparisonTableSlice,
+      ComparisonTableSliceDefaultPrimaryItemsItem,
+      ComparisonTableSliceDefaultPrimary,
+      ComparisonTableSliceVariation,
+      ComparisonTableSliceDefault,
+      TestimonialsSlice,
+      TestimonialsSliceDefaultPrimaryItemsItem,
+      TestimonialsSliceDefaultPrimary,
+      TestimonialsSliceVariation,
+      TestimonialsSliceDefault,
+      TechnicalSpecsSlice,
+      TechnicalSpecsSliceDefaultPrimarySpecsItem,
+      TechnicalSpecsSliceDefaultPrimary,
+      TechnicalSpecsSliceVariation,
+
+      TechnicalSpecsSliceDefault,
+      AmbientBackgroundSlice,
+      AmbientBackgroundSliceDefaultPrimary,
+      AmbientBackgroundSliceVariation,
+      AmbientBackgroundSliceDefault,
+      ContentImageSplitSlice,
+      ContentImageSplitSliceDefaultPrimary,
+      ContentImageSplitSliceVariation,
+      ContentImageSplitSliceDefault,
+      TextRevealSlice,
+      TextRevealSliceDefaultPrimary,
+      TextRevealSliceVariation,
+
+      TextRevealSliceDefault,
+      ClosingTransitionSlice,
+      ClosingTransitionSliceDefaultPrimary,
+      ClosingTransitionSliceVariation,
+      ClosingTransitionSliceDefault,
     };
   }
 }
